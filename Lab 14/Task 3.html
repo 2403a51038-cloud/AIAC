@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conference Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .header, .footer {
+      background: linear-gradient(135deg, #ff9800, #ffc107);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .header::after, .footer::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 20px;
+      background-image: url('https://www.transparenttextures.com/patterns/geometry.png');
+      opacity: 0.2;
+      bottom: 0;
+      left: 0;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    form {
+      padding: 2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #ff9800;
+      box-shadow: 0 0 5px rgba(255,152,0,0.5);
+    }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .checkbox input {
+      margin-right: 0.5rem;
+    }
+
+    button {
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #e68900;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="form" aria-labelledby="formTitle">
+    <div class="header">
+      <h1 id="formTitle">Event Registration Form</h1>
+    </div>
+    <form id="registrationForm" novalidate>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" aria-required="true" />
+      <div class="error" id="nameError"></div>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" aria-required="true" />
+      <div class="error" id="emailError"></div>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" aria-required="true" />
+      <div class="error" id="phoneError"></div>
+
+      <label for="session">Session:</label>
+      <select id="session" name="session" aria-required="true">
+        <option value="">-- Choose a session --</option>
+        <option value="frontend">Front-End Development</option>
+        <option value="backend">Back-End Development</option>
+        <option value="data">Data Science & AI</option>
+        <option value="ux">UI/UX Design</option>
+      </select>
+      <div class="error" id="sessionError"></div>
+
+      <div class="checkbox">
+        <input type="checkbox" id="terms" name="terms" aria-required="true" />
+        <label for="terms">I accept the terms</label>
+      </div>
+      <div class="error" id="termsError"></div>
+
+      <button type="submit">Submit</button>
+    </form>
+    <div class="footer"></div>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const session = document.getElementById("session");
+      const terms = document.getElementById("terms");
+
+      // Clear errors
+      document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+      if (name.value.trim() === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        valid = false;
+      }
+
+      if (email.value.trim() === "" || !email.value.includes("@")) {
+        document.getElementById("emailError").textContent = "Valid email is required.";
+        valid = false;
+      }
+
+      if (phone.value.trim() === "" || phone.value.length < 10) {
+        document.getElementById("phoneError").textContent = "Valid phone number is required.";
+        valid = false;
+      }
+
+      if (session.value === "") {
+        document.getElementById("sessionError").textContent = "Please select a session.";
+        valid = false;
+      }
+
+      if (!terms.checked) {
+        document.getElementById("termsError").textContent = "You must accept the terms.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Registration submitted successfully!");
+        this.reset();
+      }
+    });
+  </script>
+</body>
+</html>

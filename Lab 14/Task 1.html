@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shari | Notebook Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #dff0ff;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        #dff0ff 0px,
+        #dff0ff 23px,
+        #b0d4f1 24px
+      );
+      color: #333;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      background-color: #fff;
+      border-bottom: 2px solid #4a90e2;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 2rem;
+      margin: 0;
+      color: #333;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      color: #e91e63;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .hero h2 {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 2.5rem;
+      color: #4a90e2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .about h2,
+    .portfolio h2,
+    .contact h2 {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .about {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-left: 4px solid #4a90e2;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .pen {
+      position: absolute;
+      right: -20px;
+      top: 20px;
+      width: 60px;
+    }
+
+    .portfolio {
+      background-color: rgba(255, 240, 245, 0.8);
+      border-left: 4px solid #e91e63;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .project {
+      margin-bottom: 1.5rem;
+    }
+
+    .project h3 {
+      font-size: 1.3rem;
+      color: #e91e63;
+      margin-bottom: 0.5rem;
+    }
+
+    .project p {
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .helping {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #d32f2f;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .helping img {
+      width: 40px;
+    }
+
+    .contact {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-left: 4px solid #4a90e2;
+      padding-left: 1rem;
+    }
+
+    .contact a {
+      color: #4a90e2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shari</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Hello, I'm Shari</h2>
+    <p>A passionate web designer and front-end developer</p>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>Date: 19 November 2025 | Term: 4</p>
+    <p>
+      I'm Shari, a creative and results-driven professional with a passion for building beautiful and functional web experiences.
+      I specialize in HTML, CSS, and JavaScript, and love bringing ideas to life in the browser.
+    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Fountain_pen_icon.svg/120px-Fountain_pen_icon.svg.png" alt="Pen" class="pen">
+  </section>
+
+  <section id="projects" class="portfolio">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>Classroom Issue Tracker</h3>
+      <p>
+        A web-based tool designed to help students and teachers report, track, and resolve classroom-related issues.
+        Built with HTML, CSS, and JavaScript, it features a clean UI, status filters, and admin controls.
+      </p>
+  </section>
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:shari@example.com">shari@example.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/shari" target="_blank">linkedin.com/in/shari</a></p>
+    <p>GitHub: <a href="https://github.com/shari" target="_blank">github.com/shari</a></p>
+  </section>
+  <footer>
+    <p>&copy; 2025 Shari. All rights reserved.</p>
+  </footer>
+</body>
+</html>

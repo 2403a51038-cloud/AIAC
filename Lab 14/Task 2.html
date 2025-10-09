@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefefe;
+    }
+
+    .store-header {
+      text-align: center;
+      padding: 1rem;
+      background-color: #007bff;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .category-select {
+      display: flex;
+      justify-content: center;
+      margin: 1rem;
+    }
+
+    .category-select__dropdown {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 200px;
+    }
+
+    .store-page {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, #ffffff, #f9f9f9);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card__badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ff4081;
+      color: white;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .product-card__image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .product-card__title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card__price {
+      font-size: 1.1rem;
+      color: #007bff;
+      margin-bottom: 1rem;
+    }
+
+    .product-card__options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-card__select,
+    .product-card__input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .product-card__button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-card__button:hover {
+      background-color: #218838;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="store-header">🛍️ Welcome to SHARI's Store</div>
+
+  <div class="category-select">
+    <select class="category-select__dropdown" onchange="filterCategory(this.value)">
+      <option value="">Select Category</option>
+      <option value="groceries">Groceries</option>
+      <option value="clothing">Clothing</option>
+      <option value="electronics">Electronics</option>
+    </select>
+  </div>
+
+  <div class="store-page">
+
+    <!-- Grocery Item -->
+    <div class="product-card category-groceries hidden">
+      <div class="product-card__badge">Best Seller</div>
+      <img src="https://images.unsplash.com/photo-1604908177522-3f6f3b6b3c4e?auto=format&fit=crop&w=600&q=80" alt="Fresh Apples" class="product-card__image" />
+      <h2 class="product-card__title">Fresh Apples (1kg)</h2>
+      <p class="product-card__price">₹120</p>
+      <div class="product-card__options">
+        <input type="number" min="1" value="1" class="product-card__input" id="qty-apples" />
+      </div>
+      <button class="product-card__button" onclick="addToCart('Fresh Apples', 'N/A', 'N/A', document.getElementById('qty-apples').value)">Add to Cart</button>
+    </div>
+
+    <!-- Clothing Item -->
+    <div class="product-card category-clothing hidden">
+      <div class="product-card__badge">Trending</div>
+      <img src="https://images.unsplash.com/photo-1618354691228-3e3f3b6b3c4e?auto=format&fit=crop&w=600&q=80" alt="Cotton T-Shirt" class="product-card__image" />
+      <h2 class="product-card__title">Cotton T-Shirt</h2>
+      <p class="product-card__price">₹499</p>
+      <div class="product-card__options">
+        <select class="product-card__select" id="size-shirt">
+          <option value="">Select Size</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+        </select>
+        <select class="product-card__select" id="color-shirt">
+          <option value="">Select Color</option>
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+        </select>
+        <input type="number" min="1" value="1" class="product-card__input" id="qty-shirt" />
+      </div>
+      <button class="product-card__button" onclick="addToCart('Cotton T-Shirt', document.getElementById('size-shirt').value, document.getElementById('color-shirt').value, document.getElementById('qty-shirt').value)">Add to Cart</button>
+    </div>
+
+    <!-- Electronics Item -->
+    <div class="product-card category-electronics hidden">
+      <div class="product-card__badge">Limited Stock</div>
+      <img src="https://images.unsplash.com/photo-1580910051070-7f6f3b6b3c4e?auto=format&fit=crop&w=600&q=80" alt="Wireless Headphones" class="product-card__image" />
+      <h2 class="product-card__title">Wireless Headphones</h2>
+      <p class="product-card__price">₹2,999</p>
+      <div class="product-card__options">
+        <select class="product-card__select" id="color-headphones">
+          <option value="">Select Color</option>
+          <option value="Black">Black</option>
+          <option value="Blue">Blue</option>
+        </select>
+        <input type="number" min="1" value="1" class="product-card__input" id="qty-headphones" />
+      </div>
+      <button class="product-card__button" onclick="addToCart('Wireless Headphones', 'N/A', document.getElementById('color-headphones').value, document.getElementById('qty-headphones').value)">Add to Cart</button>
+    </div>
+
+  </div>
+
+  <script>
+    function filterCategory(category) {
+      const allCards = document.querySelectorAll('.product-card');
+      allCards.forEach(card => card.classList.add('hidden'));
+
+      if (category) {
+        const selectedCards = document.querySelectorAll(`.category-${category}`);
+        selectedCards.forEach(card => card.classList.remove('hidden'));
+      }
+    }
+
+    function addToCart(name, size, color, quantity) {
+      alert(`🛒 Added to cart:\n- Item: ${name}\n- Size: ${size}\n- Color: ${color}\n- Quantity: ${quantity}`);
+    }
+  </script>
+</body>
+</html>

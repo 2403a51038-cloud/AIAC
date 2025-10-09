@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Directory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fce4ec);
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00796b;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    #status {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    li {
+      background: #ffffff;
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      border-left: 6px solid #ff4081;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    li:hover {
+      transform: translateY(-4px);
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      height: 1.2rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .error {
+      color: #d32f2f;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #00796b;
+    }
+
+    .user-email {
+      font-size: 0.95rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Directory</h1>
+  <div id="status" role="status" aria-live="polite">Loading users...</div>
+  <ul id="userList" aria-label="User list">
+    <!-- Skeleton placeholders -->
+    <li><div class="skeleton" style="width: 60%"></div></li>
+    <li><div class="skeleton" style="width: 40%"></div></li>
+    <li><div class="skeleton" style="width: 50%"></div></li>
+  </ul>
+
+  <script>
+    const status = document.getElementById("status");
+    const userList = document.getElementById("userList");
+
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(data => {
+        status.textContent = "Users loaded successfully.";
+        userList.innerHTML = ""; // Clear skeletons
+
+        data.forEach(user => {
+          const li = document.createElement("li");
+          const name = document.createElement("div");
+          name.className = "user-name";
+          name.textContent = user.name;
+
+          const email = document.createElement("div");
+          email.className = "user-email";
+          email.textContent = user.email;
+
+          li.appendChild(name);
+          li.appendChild(email);
+          userList.appendChild(li);
+        });
+      })
+      .catch(error => {
+        status.innerHTML = `<div class="error">⚠️ Failed to load users. Please try again.</div>`;
+        userList.innerHTML = "";
+        console.error("Fetch error:", error);
+      });
+  </script>
+</body>
+</html>
